@@ -1,0 +1,6 @@
+tinkoff-investments
+pandas
+numpy
+ta
+python-dotenv
+matplotlib
