@@ -249,8 +249,16 @@ def main():
     bot = TradingBot(config.TINKOFF_SANDBOX_TOKEN, sandbox=True)
 
     with Client(config.TINKOFF_SANDBOX_TOKEN) as client:
-        # Получаем FIGI для Si
-        figi = bot._get_figi_by_ticker(client, config.INSTRUMENTS['Si'])
+        ticker_key = config.BACKTEST_TICKER
+        ticker_symbol = config.INSTRUMENTS.get(ticker_key)
+        if not ticker_symbol:
+            available = ", ".join(sorted(config.INSTRUMENTS.keys()))
+            print(f"Unknown ticker '{ticker_key}' in BACKTEST_TICKER.")
+            print(f"Available tickers: {available}")
+            return
+
+        # Получаем FIGI для выбранного тикера
+        figi = bot._get_figi_by_ticker(client, ticker_symbol)
 
         if not figi:
             print("Could not find instrument")
@@ -265,7 +273,7 @@ def main():
 
         # Запускаем бэктест
         backtester = Backtester(initial_capital=100000)
-        backtester.run_backtest(df, ticker='Si')
+        backtester.run_backtest(df, ticker=ticker_key)
 
 
 if __name__ == "__main__":
