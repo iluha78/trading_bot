@@ -10,7 +10,7 @@ from trader import TradingBot
 
 
 def export_historical_data(ticker, figi, client, bot, days=365):
-    """Выгрузка исторических данных для одной акции"""
+    """Выгрузка исторических данных для одной акции кроме сбер втб газпром идр"""
 
     print(f"Fetching data for {ticker}...", end=' ')
 
