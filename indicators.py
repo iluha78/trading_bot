@@ -34,6 +34,8 @@ class TechnicalIndicators:
     @staticmethod
     def calculate_adx(df: pd.DataFrame, period: int = 14) -> pd.Series:
         """Average Directional Index - сила тренда"""
+        if len(df) < period:
+            return pd.Series(np.nan, index=df.index)
         adx = ADXIndicator(high=df['high'], low=df['low'], close=df['close'], window=period)
         return adx.adx()
 

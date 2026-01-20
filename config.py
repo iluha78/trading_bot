@@ -78,3 +78,6 @@ TRAILING_STOP_PERCENT = 0.005  # 0.5% трейлинг
 # Logging
 LOG_LEVEL = 'INFO'
 LOG_FILE = 'trading_bot.log'
+
+# Backtest defaults
+BACKTEST_TICKER = os.getenv('BACKTEST_TICKER', 'SBER')
